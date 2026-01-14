@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday AJE 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .btn {
+      background: #fff;
+      color: #ff6f91;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff6f91;
+      color: #fff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Hearts animation */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      animation: fall 6s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Page 3 - Satu video besar */
+    .gallery {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .gallery video {
+      width: 80%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Musik background -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e0f2e8b4b.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Page 1 -->
+  <div class="container" id="page1">
+    <h1>Hai AJE 💕</h1>
+    <p>
+      Ada sesuatu yang spesial hari ini…<br />
+      Sesuatu yang aku buat dengan sepenuh hati 💖
+    </p>
+    <button class="btn" onclick="nextPage()">Klik di sini sayang 💌</button>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="container hidden" id="page2">
+    <h1>Happy Birthday 🎂</h1>
+    <p>
+      Selamat ulang tahun, <b>AJE my dear</b> 💖<br /><br />
+      Terima kasih sudah menjadi bagian terindah dalam hidupku.<br />
+      Setiap tawa kamu, setiap cerita kamu, semuanya berarti buat aku.<br />
+      Aku berharap hari ini dan seterusnya kamu selalu bahagia, terus menjadi istri yang selalu lucu<br />
+      dan aku bisa terus ada di samping kamu 🤍
+    </p>
+    <button class="btn" onclick="nextPage()">Ada kejutan lagi 😘</button>
+  </div>
+
+  <!-- Page 3 - Satu Video Besar -->
+  <div class="container hidden" id="page3">
+    <h1>Kenangan Kita 📸</h1>
+    <p>
+      Hope you always love with the happiness moment from us 💞
+    </p>
+
+    <div class="gallery">
+      <video autoplay loop muted playsinline controls width="800" style="border-radius:15px;">
+        <source src="video1.mp4" type="video/mp4" />
+        Browser kamu tidak mendukung video tag.
+      </video>
+    </div>
+
+    <button class="btn" onclick="nextPage()">Pesan terakhir 💗</button>
+  </div>
+
+  <!-- Page 4 -->
+  <div class="container hidden" id="page4">
+    <h1>Aku Sayang Kamu ❤️</h1>
+    <p>
+      AJE, my dear…<br /><br />
+      Maaf Aku masih belum bisa jadi yang sempurna,<br />
+      tapi aku janji akan selalu berusaha jadi yang terbaik buat kamu.<br />
+      Semoga ulang tahun ini membawa lebih banyak senyum, cinta,<br />
+      dan mimpi yang jadi nyata ✨and one more gift, this is it...
+    </p>
+
+    <footer>
+      Dari aku, yang selalu mencintaimu 💕
+    </footer>
+  </div>
+
+  <script>
+    let currentPage = 1;
+
+    function nextPage() {
+      document.getElementById("page" + currentPage).classList.add("hidden");
+      currentPage++;
+      document.getElementById("page" + currentPage).classList.remove("hidden");
+    }
+
+    // Create falling hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }, 300);
+  </script>
+</body>
+</html>
