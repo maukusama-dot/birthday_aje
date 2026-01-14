@@ -105,9 +105,9 @@
 
 <body>
 
-  <!-- Musik background online -->
+  <!-- Musik background -->
   <div class="music-control">
-    <audio id="bg-music" autoplay loop controls>
+    <audio id="bg-music" loop controls>
       <source src="https://orangefreesounds.com/wp-content/uploads/2023/02/Romantic-background-music-intro.mp3" type="audio/mpeg">
       Browser kamu tidak mendukung audio tag.
     </audio>
@@ -117,7 +117,7 @@
   <div class="container" id="page1">
     <h1>Hai AJE 💕</h1>
     <p>Ada sesuatu yang spesial hari ini…<br />Sesutu yang aku buat dengan sepenuh hati 💖</p>
-    <button class="btn" onclick="nextPage()">Klik di sini sayang 💌</button>
+    <button class="btn" onclick="startMusicAndNextPage()">Klik di sini sayang 💌</button>
   </div>
 
   <!-- Page 2 -->
@@ -139,7 +139,7 @@
     <p>Hope you always love with the happiness moment from us 💞</p>
 
     <div class="gallery">
-      <!-- Video lokal lama tetap dipakai -->
+      <!-- Video lokal lama -->
       <video autoplay loop muted playsinline controls width="800" style="border-radius:15px;">
         <source src="video1.mp4" type="video/mp4">
         Browser kamu tidak mendukung video tag.
@@ -164,6 +164,13 @@
 
   <script>
     let currentPage = 1;
+    const music = document.getElementById('bg-music');
+
+    function startMusicAndNextPage() {
+      // Mainkan musik (bypass autoplay restriction browser)
+      music.play().catch(() => console.log('Klik diperlukan untuk autoplay musik'));
+      nextPage();
+    }
 
     function nextPage() {
       document.getElementById("page" + currentPage).classList.add("hidden");
