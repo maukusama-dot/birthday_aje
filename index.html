@@ -12,7 +12,10 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      /* Background foto dengan overlay gelap transparan */
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                  url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
       text-align: center;
       overflow-x: hidden;
@@ -139,7 +142,7 @@
     <p>Hope you always love with the happiness moment from us 💞</p>
 
     <div class="gallery">
-      <!-- Video lokal lama -->
+      <!-- Video lama -->
       <video autoplay loop muted playsinline controls width="800" style="border-radius:15px;">
         <source src="video1.mp4" type="video/mp4">
         Browser kamu tidak mendukung video tag.
