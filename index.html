@@ -64,17 +64,11 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
     }
 
-    /* Page 3 - Satu video besar */
+    /* Page 3 - Video besar */
     .gallery {
       display: flex;
       justify-content: center;
@@ -94,23 +88,35 @@
       font-size: 0.9em;
       opacity: 0.8;
     }
+
+    /* Music control position */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50px;
+      padding: 5px 15px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Musik background -->
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7e0f2e8b4b.mp3" type="audio/mpeg" />
-  </audio>
+  <!-- Musik background online -->
+  <div class="music-control">
+    <audio id="bg-music" autoplay loop controls>
+      <source src="https://orangefreesounds.com/wp-content/uploads/2023/02/Romantic-background-music-intro.mp3" type="audio/mpeg">
+      Browser kamu tidak mendukung audio tag.
+    </audio>
+  </div>
 
   <!-- Page 1 -->
   <div class="container" id="page1">
     <h1>Hai AJE 💕</h1>
-    <p>
-      Ada sesuatu yang spesial hari ini…<br />
-      Sesuatu yang aku buat dengan sepenuh hati 💖
-    </p>
+    <p>Ada sesuatu yang spesial hari ini…<br />Sesutu yang aku buat dengan sepenuh hati 💖</p>
     <button class="btn" onclick="nextPage()">Klik di sini sayang 💌</button>
   </div>
 
@@ -127,16 +133,15 @@
     <button class="btn" onclick="nextPage()">Ada kejutan lagi 😘</button>
   </div>
 
-  <!-- Page 3 - Satu Video Besar -->
+  <!-- Page 3 -->
   <div class="container hidden" id="page3">
     <h1>Kenangan Kita 📸</h1>
-    <p>
-      Hope you always love with the happiness moment from us 💞
-    </p>
+    <p>Hope you always love with the happiness moment from us 💞</p>
 
     <div class="gallery">
+      <!-- Video lokal lama tetap dipakai -->
       <video autoplay loop muted playsinline controls width="800" style="border-radius:15px;">
-        <source src="video1.mp4" type="video/mp4" />
+        <source src="video1.mp4" type="video/mp4">
         Browser kamu tidak mendukung video tag.
       </video>
     </div>
@@ -154,10 +159,7 @@
       Semoga ulang tahun ini membawa lebih banyak senyum, cinta,<br />
       dan mimpi yang jadi nyata ✨and one more gift, this is it...
     </p>
-
-    <footer>
-      Dari aku, yang selalu mencintaimu 💕
-    </footer>
+    <footer>Dari aku, yang selalu mencintaimu 💕</footer>
   </div>
 
   <script>
