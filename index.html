@@ -15,6 +15,7 @@
       color: #fff;
       text-align: center;
       overflow-x: hidden;
+      background: #000;
     }
 
     /* ===== BACKGROUND VIDEO ===== */
@@ -31,77 +32,48 @@
     .video-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0,0,0,0.45);
       z-index: -1;
     }
 
     /* ===== PAGE CONTAINER ===== */
     .container {
+      display: none;
       min-height: 100vh;
-      padding: 40px 20px;
-      display: flex;
+      padding: 30px 15px;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
     }
 
     .container.active {
-      opacity: 1;
-      transform: translateY(0);
+      display: flex;
     }
+
+    .hidden { display: none; }
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 3em;
       margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .container.active h1 {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.2s;
+      font-size: 2.5em;
     }
 
     p {
-      font-size: 1.1em;
-      line-height: 1.6;
-      max-width: 720px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .container.active p {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.4s;
+      font-size: 1em;
+      line-height: 1.4;
+      max-width: 90%;
     }
 
     .btn {
-      margin-top: 25px;
-      padding: 12px 28px;
+      margin-top: 20px;
+      padding: 10px 25px;
       border-radius: 30px;
       border: none;
-      font-size: 1em;
+      font-size: 0.95em;
       cursor: pointer;
       background: #fff;
       color: #ff6f91;
       transition: 0.3s;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .container.active .btn {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.6s;
     }
 
     .btn:hover {
@@ -109,12 +81,12 @@
       color: #fff;
     }
 
-    /* ===== HEART ANIMATION ===== */
+    /* ===== HEART ANIMATION (lighter) ===== */
     .heart {
       position: fixed;
       top: -10px;
-      font-size: 20px;
-      animation: fall linear infinite;
+      font-size: 16px;
+      animation: fall linear;
       z-index: 5;
     }
 
@@ -123,56 +95,46 @@
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* ===== GALLERY (9:16 Video) ===== */
+    /* ===== GALLERY (responsive video) ===== */
     .gallery {
-      margin-top: 25px;
+      margin-top: 20px;
       display: flex;
       justify-content: center;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .container.active .gallery {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.5s;
     }
 
     .gallery video {
-      width: auto;             
-      height: 70vh;            
-      max-height: 90vh;
-      aspect-ratio: 9 / 16;    
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
-      object-fit: cover;       
+      width: auto;
+      max-width: 90%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      object-fit: cover;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .container.active footer {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.6s;
+      margin-top: 25px;
+      font-size: 0.85em;
     }
 
     /* ===== MUSIC ===== */
     .music-control {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 15px;
+      right: 15px;
       background: rgba(255,255,255,0.85);
-      padding: 6px 15px;
+      padding: 5px 12px;
       border-radius: 50px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
       z-index: 1000;
+    }
+
+    /* ===== RESPONSIVE FONTS ===== */
+    @media (max-width: 480px) {
+      h1 { font-size: 2em; }
+      p { font-size: 0.95em; }
+      .btn { font-size: 0.9em; padding: 8px 20px; }
+      .gallery video { max-height: 60vh; }
     }
   </style>
 </head>
@@ -206,10 +168,9 @@
   <div class="container" id="page2">
     <h1>Happy Birthday 🎂</h1>
     <p>
-      Selamat ulang tahun, <b>AJE my dear</b> 💖<br><br>
+      Selamat ulang tahun, <b>AJE my dear</b> 💖<br>
       Terima kasih sudah menjadi bagian terindah dalam hidupku.<br>
-      Setiap tawa kamu, setiap cerita kamu, semuanya berarti buat aku.<br>
-      Semoga hari ini dan seterusnya kamu selalu bahagia serta semua impian kamu bisa tercapai 🤍
+      Semoga semua impianmu tercapai 🤍
     </p>
     <button class="btn" onclick="nextPage()">Ada kejutan lagi 😘</button>
   </div>
@@ -232,7 +193,7 @@
     <p>
       Maaf aku belum bisa jadi yang sempurna,<br>
       tapi aku janji akan selalu berusaha jadi yang terbaik buat kamu.<br>
-      Semoga ulang tahun ini membawa lebih banyak cinta dan senyum. Love sekebon pokoknya✨
+      Semoga ulang tahun ini membawa lebih banyak cinta dan senyum, Love Sekebon pokoknya✨
     </p>
     <footer>Dari aku, yang selalu mencintaimu 💕</footer>
   </div>
@@ -252,30 +213,31 @@
       current.classList.remove("active");
       current.classList.add("hidden");
 
-      setTimeout(() => {
-        currentPage++;
-        const next = document.getElementById("page" + currentPage);
-        if (next) {
-          next.classList.remove("hidden");
-          next.classList.add("active");
-        }
-      }, 800);
+      currentPage++;
+      const next = document.getElementById("page" + currentPage);
+      if (next) {
+        next.classList.remove("hidden");
+        next.classList.add("active");
+      }
     }
 
-    // Hearts
+    // Hearts animation (lebih ringan)
     setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-      heart.style.transform = `rotate(${Math.random()*360}deg) scale(${Math.random() + 0.5})`;
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
+      if (document.querySelectorAll('.heart').length < 15) { // max 15 hearts
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        const duration = Math.random() * 3 + 3; // 3-6 detik
+        heart.style.animationDuration = duration + "s";
+        heart.style.fontSize = (Math.random() * 18 + 12) + "px";
+        heart.style.transform = `rotate(${Math.random()*360}deg) scale(${Math.random() + 0.5})`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), duration * 1000);
+      }
+    }, 400);
 
-    // Slow motion background
+    // Slow motion background video
     document.getElementById("bg-video").playbackRate = 0.75;
   </script>
 
