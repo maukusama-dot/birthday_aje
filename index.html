@@ -5,48 +5,103 @@
   <title>Happy Birthday AJE 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      /* Background foto dengan overlay gelap transparan */
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                  url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
       color: #fff;
       text-align: center;
       overflow-x: hidden;
     }
 
+    /* ===== BACKGROUND VIDEO ===== */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: -1;
+    }
+
+    /* ===== PAGE CONTAINER ===== */
     .container {
-      padding: 40px 20px;
       min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .container.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 3em;
       margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .container.active h1 {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
     }
 
     p {
       font-size: 1.1em;
       line-height: 1.6;
+      max-width: 720px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .container.active p {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.4s;
     }
 
     .btn {
-      background: #fff;
-      color: #ff6f91;
-      border: none;
-      padding: 12px 25px;
+      margin-top: 25px;
+      padding: 12px 28px;
       border-radius: 30px;
+      border: none;
       font-size: 1em;
       cursor: pointer;
-      margin-top: 25px;
+      background: #fff;
+      color: #ff6f91;
       transition: 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .container.active .btn {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.6s;
     }
 
     .btn:hover {
@@ -54,52 +109,68 @@
       color: #fff;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    /* Hearts animation */
+    /* ===== HEART ANIMATION ===== */
     .heart {
       position: fixed;
       top: -10px;
       font-size: 20px;
-      animation: fall 6s linear infinite;
+      animation: fall linear infinite;
+      z-index: 5;
     }
 
     @keyframes fall {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(110vh); opacity: 0; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Page 3 - Video besar */
+    /* ===== GALLERY (9:16 Video) ===== */
     .gallery {
+      margin-top: 25px;
       display: flex;
       justify-content: center;
-      margin-top: 25px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .container.active .gallery {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.5s;
     }
 
     .gallery video {
-      width: 80%;
-      max-width: 800px;
-      height: auto;
+      width: auto;             
+      height: 70vh;            
+      max-height: 90vh;
+      aspect-ratio: 9 / 16;    
       border-radius: 15px;
-      object-fit: cover;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      object-fit: cover;       
     }
 
     footer {
       margin-top: 40px;
       font-size: 0.9em;
-      opacity: 0.8;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
-    /* Music control position */
+    .container.active footer {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.6s;
+    }
+
+    /* ===== MUSIC ===== */
     .music-control {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255,255,255,0.85);
+      padding: 6px 15px;
       border-radius: 50px;
-      padding: 5px 15px;
       box-shadow: 0 0 8px rgba(0,0,0,0.3);
       z-index: 1000;
     }
@@ -108,92 +179,105 @@
 
 <body>
 
-  <!-- Musik background -->
+  <!-- BACKGROUND VIDEO -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="background-video.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- MUSIC -->
   <div class="music-control">
     <audio id="bg-music" loop controls>
       <source src="https://orangefreesounds.com/wp-content/uploads/2023/02/Romantic-background-music-intro.mp3" type="audio/mpeg">
-      Browser kamu tidak mendukung audio tag.
     </audio>
   </div>
 
-  <!-- Page 1 -->
-  <div class="container" id="page1">
+  <!-- PAGE 1 -->
+  <div class="container active" id="page1">
     <h1>Hai AJE 💕</h1>
-    <p>Ada sesuatu yang spesial hari ini…<br />Sesutu yang aku buat dengan sepenuh hati 💖</p>
-    <button class="btn" onclick="startMusicAndNextPage()">Klik di sini sayang 💌</button>
+    <p>
+      Ada sesuatu yang spesial hari ini…<br>
+      Sesuatu yang aku buat dengan sepenuh hati 💖
+    </p>
+    <button class="btn" onclick="startMusicAndNext()">Klik di sini sayang 💌</button>
   </div>
 
-  <!-- Page 2 -->
-  <div class="container hidden" id="page2">
+  <!-- PAGE 2 -->
+  <div class="container" id="page2">
     <h1>Happy Birthday 🎂</h1>
     <p>
-      Selamat ulang tahun, <b>AJE my dear</b> 💖<br /><br />
-      Terima kasih sudah menjadi bagian terindah dalam hidupku.<br />
-      Setiap tawa kamu, setiap cerita kamu, semuanya berarti buat aku.<br />
-      Aku berharap hari ini dan seterusnya kamu selalu bahagia, terus menjadi istri yang selalu lucu<br />
-      dan aku bisa terus ada di samping kamu 🤍
+      Selamat ulang tahun, <b>AJE my dear</b> 💖<br><br>
+      Terima kasih sudah menjadi bagian terindah dalam hidupku.<br>
+      Setiap tawa kamu, setiap cerita kamu, semuanya berarti buat aku.<br>
+      Semoga hari ini dan seterusnya kamu selalu bahagia serta semua impian kamu bisa tercapai 🤍
     </p>
     <button class="btn" onclick="nextPage()">Ada kejutan lagi 😘</button>
   </div>
 
-  <!-- Page 3 -->
-  <div class="container hidden" id="page3">
-    <h1>Kenangan Kita 📸</h1>
-    <p>Hope you always love with the happiness moment from us 💞</p>
-
+  <!-- PAGE 3 -->
+  <div class="container" id="page3">
+    <h1>Our Happines Moment 📸</h1>
+    <p>Hope you always fall in love with our happiest moments 💞</p>
     <div class="gallery">
-      <!-- Video lama -->
-      <video autoplay loop muted playsinline controls width="800" style="border-radius:15px;">
+      <video autoplay loop muted playsinline controls>
         <source src="video1.mp4" type="video/mp4">
-        Browser kamu tidak mendukung video tag.
       </video>
     </div>
-
     <button class="btn" onclick="nextPage()">Pesan terakhir 💗</button>
   </div>
 
-  <!-- Page 4 -->
-  <div class="container hidden" id="page4">
-    <h1>Aku Sayang Kamu ❤️</h1>
+  <!-- PAGE 4 -->
+  <div class="container" id="page4">
+    <h1>Aku Zhayang Kamuuu Bingitt ❤️</h1>
     <p>
-      AJE, my dear…<br /><br />
-      Maaf Aku masih belum bisa jadi yang sempurna,<br />
-      tapi aku janji akan selalu berusaha jadi yang terbaik buat kamu.<br />
-      Semoga ulang tahun ini membawa lebih banyak senyum, cinta,<br />
-      dan mimpi yang jadi nyata ✨and one more gift, this is it...
+      Maaf aku belum bisa jadi yang sempurna,<br>
+      tapi aku janji akan selalu berusaha jadi yang terbaik buat kamu.<br>
+      Semoga ulang tahun ini membawa lebih banyak cinta dan senyum. Love sekebon pokoknya✨
     </p>
     <footer>Dari aku, yang selalu mencintaimu 💕</footer>
   </div>
 
+  <!-- SCRIPT -->
   <script>
     let currentPage = 1;
-    const music = document.getElementById('bg-music');
+    const music = document.getElementById("bg-music");
 
-    function startMusicAndNextPage() {
-      // Mainkan musik (bypass autoplay restriction browser)
-      music.play().catch(() => console.log('Klik diperlukan untuk autoplay musik'));
+    function startMusicAndNext() {
+      music.play().catch(()=>{});
       nextPage();
     }
 
     function nextPage() {
-      document.getElementById("page" + currentPage).classList.add("hidden");
-      currentPage++;
-      document.getElementById("page" + currentPage).classList.remove("hidden");
+      const current = document.getElementById("page" + currentPage);
+      current.classList.remove("active");
+      current.classList.add("hidden");
+
+      setTimeout(() => {
+        currentPage++;
+        const next = document.getElementById("page" + currentPage);
+        if (next) {
+          next.classList.remove("hidden");
+          next.classList.add("active");
+        }
+      }, 800);
     }
 
-    // Create falling hearts
+    // Hearts
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.innerHTML = "❤️";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      heart.style.transform = `rotate(${Math.random()*360}deg) scale(${Math.random() + 0.5})`;
       document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
+      setTimeout(() => heart.remove(), 6000);
     }, 300);
+
+    // Slow motion background
+    document.getElementById("bg-video").playbackRate = 0.75;
   </script>
+
 </body>
 </html>
